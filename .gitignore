@@ -45,3 +45,13 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.db
+*.suo
+*.user
+*.obj
+_Debug
+_Intermediate
+_Release
+.vs
+*.suo
+.vs/smbutil_i/v14/.suo
