@@ -5,17 +5,9 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|x64">
-      <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|x64">
-      <Configuration>Release</Configuration>
-      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -32,19 +24,7 @@
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v141</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
@@ -57,15 +37,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
-  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
@@ -76,23 +48,11 @@
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <GenerateManifest>false</GenerateManifest>
-    <OutDir>$(SolutionDir)_$(Configuration)\$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)_Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)_$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)_Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <GenerateManifest>false</GenerateManifest>
-    <OutDir>$(SolutionDir)_$(Configuration)\$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)_Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -118,46 +78,6 @@
       <TypeLibraryName>.\Release\smbutil_i.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
-    </Midl>
-    <ResourceCompile>
-      <Culture>0x0409</Culture>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>$(IntDir)smbutil_i.bsc</OutputFile>
-    </Bscmake>
-    <Link>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <SubSystem>Windows</SubSystem>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalDependencies>winmm.lib;comctl32.lib;imm32.lib;libcmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <StringPooling>true</StringPooling>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <Optimization>MaxSpeed</Optimization>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <WarningLevel>Level3</WarningLevel>
-      <TreatWarningAsError>false</TreatWarningAsError>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;WIN32;_WIN64;_WINDOWS;INTERNATIONAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>$(OutDir)</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>$(IntDir)smbutil_i.pch</PrecompiledHeaderOutputFile>
-      <ObjectFileName>$(OutDir)</ObjectFileName>
-      <ProgramDataBaseFileName>$(OutDir)</ProgramDataBaseFileName>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-    </ClCompile>
-    <Midl>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\Release\smbutil_i.tlb</TypeLibraryName>
-      <MkTypLibCompatible>true</MkTypLibCompatible>
     </Midl>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -219,48 +139,6 @@
       <AdditionalDependencies>winmm.lib;comctl32.lib;imm32.lib;libcmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
-      <Optimization>Disabled</Optimization>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <WarningLevel>Level3</WarningLevel>
-      <TreatWarningAsError>false</TreatWarningAsError>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;WIN32;WIN64;_WINDOWS;INTERNATIONAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>$(OutDir)</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>$(IntDir)smbutil_i.pch</PrecompiledHeaderOutputFile>
-      <ObjectFileName>$(OutDir)</ObjectFileName>
-      <ProgramDataBaseFileName>$(OutDir)</ProgramDataBaseFileName>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <AdditionalOptions>/Zc:trigraphs %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
-    <Midl>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\Debug\smbutil_i.tlb</TypeLibraryName>
-      <MkTypLibCompatible>true</MkTypLibCompatible>
-    </Midl>
-    <ResourceCompile>
-      <Culture>0x0409</Culture>
-      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>$(IntDir)$(ProjectName).bsc</OutputFile>
-    </Bscmake>
-    <Link>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalDependencies>winmm.lib;comctl32.lib;imm32.lib;libcmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cmnlib.c" />
     <ClCompile Include="emubgset.c" />
@@ -290,17 +168,11 @@
     <CustomBuild Include="data\ram2.bin" />
     <CustomBuild Include="M6502.asm">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(SolutionDir)bin\nasm.exe" -f win32 -o $(IntDir)m6502.obj %(FullPath)</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(SolutionDir)bin\nasm.exe" -f win32 -o $(IntDir)m6502.obj %(FullPath)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">creating M6502.obj...</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">creating M6502.obj...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)\m6502.obj;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)\m6502.obj;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(SolutionDir)bin\nasm.exe" -f win32 -o $(IntDir)m6502.obj %(FullPath)</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(SolutionDir)bin\nasm.exe" -f win32 -o $(IntDir)m6502.obj %(FullPath)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">creating M6502.obj...</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">creating M6502.obj...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)\m6502.obj;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)\m6502.obj;%(Outputs)</Outputs>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
