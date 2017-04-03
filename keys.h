@@ -21,6 +21,8 @@ typedef enum _tagWHEELFUNC
 	OBJ = 3
 }WHEELFUNC;
 
+void InitializeKeyNames();
+
 HANDLE ky_Initialize();
 VOID ky_WM_MOUSEWHEEL(WPARAM wParam, LPARAM lParam);
 
