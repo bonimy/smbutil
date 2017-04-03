@@ -768,7 +768,7 @@ static void UpdateAreaSortListBox(HWND hDlg)
 	LPTSTR szBuf = GetTempStringBuffer();
 	int iWorld;
 	int iArea;
-	LPTSTR lpAttr[]={STRING_SEA, STRING_SKY, STRING_UNDERGROUND, STRING_CASTLE};
+	LPTSTR lpAttr[]={GetResourceString(IDS_SEA), GetResourceString(IDS_SKY), GetResourceString(IDS_UNDERGROUND), GetResourceString(IDS_CASTLE)};
 	//clear all item
 	SendDlgItemMessage(hDlg,IDC_AREA,LB_RESETCONTENT,0,0);
 
@@ -873,7 +873,7 @@ LRESULT CALLBACK AreaSortDlgProc(HWND hDlg,UINT message,WPARAM wParam,LPARAM lPa
 							  sRoomSel.blDoInit=TRUE;
 							  sRoomSel.bInitRoomID=bAreaData[iTmpCurSel];
 							  sRoomSel.uInitPage=0;
-							  sRoomSel.lpszTitle=STRING_AREASORT_TITLE;
+							  sRoomSel.lpszTitle=GetResourceString(IDS_AREASORT_TITLE);
 							  if(RoomSelectDialogBox(hDlg,&sRoomSel)){
 								  sblWritten=TRUE;
 								  bAreaData[iTmpCurSel]=sRoomSel.bNewRoomID;
@@ -1182,7 +1182,7 @@ static UINT MapMoveObject(UINT uRoomIDSrc,int iIndexSrc,UINT uRoomIDDst,int iPag
 		if(ObjSeekSrc.dwIndex==(DWORD)iIndexSrc && !IsMapPageRelatedObject(ObjSeekSrc.pbData))
 			break;
 		if(!MapSeekNext(&ObjSeekSrc)){
-			//Msg(STRING_SENDOBJECT_SRCERROR,MB_OK|MB_ICONWARNING);
+			//Msg(GetResourceString(IDS_SENDOBJECT_SRCERROR,MB_OK|MB_ICONWARNING);
 			return MOVEOBJ_ERR_SRCOBJ;
 		}
 	}
@@ -1214,7 +1214,7 @@ static UINT MapMoveObject(UINT uRoomIDSrc,int iIndexSrc,UINT uRoomIDDst,int iPag
 				fPrevDst=FALSE;
 			}
 			if(!MapSeekNext(&ObjSeekDst)){
-				//Msg(STRING_SENDOBJECT_DSTERROR,MB_OK|MB_ICONWARNING);
+				//Msg(GetResourceString(IDS_SENDOBJECT_DSTERROR,MB_OK|MB_ICONWARNING);
 				return MOVEOBJ_ERR_DSTPAGE;
 			}
 		}
@@ -1314,7 +1314,7 @@ static UINT BadGuysMoveObject(UINT uRoomIDSrc,int iIndexSrc,UINT uRoomIDDst,int 
 		dwPrevPageRelated = dwPageRelated;
 
 		if(!BadGuysSeekNext(&ObjSeekSrc)){
-//			Msg(STRING_SENDOBJECT_SRCERROR,MB_OK|MB_ICONWARNING);
+//			Msg(GetResourceString(IDS_SENDOBJECT_SRCERROR,MB_OK|MB_ICONWARNING);
 			return MOVEOBJ_ERR_SRCOBJ;
 		}
 	}
@@ -1350,7 +1350,7 @@ static UINT BadGuysMoveObject(UINT uRoomIDSrc,int iIndexSrc,UINT uRoomIDDst,int 
 			}
 
 			if(!BadGuysSeekNext(&ObjSeekDst)){
-				//Msg(STRING_SENDOBJECT_DSTERROR,MB_OK|MB_ICONWARNING);
+				//Msg(GetResourceString(IDS_SENDOBJECT_DSTERROR,MB_OK|MB_ICONWARNING);
 				return MOVEOBJ_ERR_DSTPAGE;
 			}
 		}
@@ -1408,13 +1408,13 @@ static void ShowSendDlgError(UINT uError)
 	switch(uError)
 	{
 	case MOVEOBJ_ERR_SRCOBJ:
-		szError = STRING_SENDOBJECT_SRCERROR;
+		szError = GetResourceString(IDS_SENDOBJECT_SRCERROR);
 		break;
 	case MOVEOBJ_ERR_DSTPAGE:
-		szError = STRING_SENDOBJECT_DSTERROR;
+		szError = GetResourceString(IDS_SENDOBJECT_DSTERROR);
 		break;
 	case MOVEOBJ_ERR_OBJOVER:
-		szError = STRING_SENDOBJECT_OVEROBJ;
+		szError = GetResourceString(IDS_SENDOBJECT_OVEROBJ);
 		break;
 	}
 

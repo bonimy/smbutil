@@ -275,7 +275,7 @@ LRESULT CALLBACK EmulatorOptionDlgProc( HWND hDlg,UINT message,WPARAM wParam,LPA
 
 			// joystick ID
 			for (N = 0;N < 2;N++) {
-				wsprintf(szBuf, TEXT("%s%d"), STRING_EMULATOROPTION_JOYSTICK, N + 1);
+				wsprintf(szBuf, TEXT("%s%d"), GetResourceString(IDS_EMULATOROPTION_JOYSTICK), N + 1);
 				SendDlgItemMessage(hDlg, IDC_JOYSTICKID, CB_ADDSTRING, 0, (LPARAM)szBuf);
 			}
 			SendDlgItemMessage(hDlg, IDC_JOYSTICKID, CB_SETCURSEL, g_uEmuJoyID == JOYSTICKID2 ? 1 : 0, 0);
@@ -2091,7 +2091,7 @@ HWND CreateEmulatorWnd(HINSTANCE hInstance,HWND hWndMDIClient)
 
 	//WS_VISIBLEを指定して作成しないと、Windowﾒﾆｭｰにｳｲﾝﾄﾞｳが追加されない。
 	hWnd=CreateMDIWindow(EMUWNDCLASSNAME,
-		            STRING_WINDOW_EMULATOR,
+		            GetResourceString(IDS_WINDOW_EMULATOR),
 					WS_CAPTION|WS_THICKFRAME|WS_MINIMIZEBOX|WS_SYSMENU|WS_VISIBLE,
 					30,20,
 					EMULATOR_WINDOWFRAMESIZEX+NES_SCREENSIZEX,EMULATOR_WINDOWFRAMESIZEY+NES_VISIBLESIZEY,
