@@ -1,6 +1,5 @@
 ﻿/************************************************************************************
 
-
                                   smb Utility
 
   File: string.h
@@ -12,25 +11,17 @@
 #ifndef STRING_J_H
 #define STRING_J_H
 
-#define PROGRAMNAME  TEXT("SMB Utility")
-
-#define STRING_VERSION_CONTRIBUTION TEXT("Multi-6502 CPU emulator by Neil Bradley (neil@synthcom.com)")
-
+//#define GetResourceString(IDS_PROGRAMNAME)  TEXT("SMB Utility")
+//#define GetResourceString(IDS_VERSION_CONTRIBUTION) TEXT("Multi-6502 CPU emulator by Neil Bradley (neil@synthcom.com)")
 #define STRING_NULL    TEXT("")
 #define STRING_UNKNOWN TEXT("Unknown")
-
 #define STRING_LOGVIEW_FILESAVE TEXT("Saved as %s.")//"%sに保存しました。"
 #define STRING_LOGVIEW_FILEOPEN TEXT("Loaded %s.")//"%sを開きました。"
 #define STRING_LOGVIEW_LOADCHR  TEXT("Imported CHR-ROM from %s.(%.4xH bytes)")//"%sから%.4xHﾊﾞｲﾄのCHRROMを読み込みました。"
-
-//
-//
 #define STRING_FILEOPENDIALOG_CHRLOAD TEXT("Import CHR-ROM from file")
-#define STRING_WINDOW_EMULATOR        TEXT("Emulator")
+//#define GetResourceString(IDS_WINDOW_EMULATOR)        TEXT("Emulator")
 #define STRING_WINDOW_OBJLIST         TEXT("Object List")
 #define STRING_WINDOW_OBJVIEW         TEXT("Object View")
-
-//
 #define STRING_OBJVIEW_TITLE          TEXT("%s <%dpage>")
 #define STRING_OBJVIEW_TITLE2         TEXT("%s <%d-%dpage>")
 #define STRING_OBJVIEW_TOOLTIP        TEXT("%d,(%d,%d) %s")

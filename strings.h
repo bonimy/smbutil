@@ -1,14 +1,10 @@
 ﻿#ifndef STRINGS_H
 #define STRINGS_H
-
-#ifndef INTERNATIONAL
-
-#include "string_j.h"
-
-#else
-
+#include "resrc1.h"
 #include "string_i.h"
+#include <Windows.h>
 
-#endif /* INTERNATIONAL */
+void InitializeResourceStrings(HINSTANCE hInstance);
+const TCHAR* GetResourceString(const int id);
 
 #endif /* STRING_H */

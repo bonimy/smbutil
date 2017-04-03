@@ -80,7 +80,7 @@
       <TargetEnvironment>Win32</TargetEnvironment>
     </Midl>
     <ResourceCompile>
-      <Culture>0x0409</Culture>
+      <Culture>0x0411</Culture>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
@@ -123,7 +123,7 @@
       <TargetEnvironment>Win32</TargetEnvironment>
     </Midl>
     <ResourceCompile>
-      <Culture>0x0409</Culture>
+      <Culture>0x0411</Culture>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
@@ -160,6 +160,7 @@
     <ClCompile Include="objwndcmn.c" />
     <ClCompile Include="roommng.c" />
     <ClCompile Include="roomseldlg.c" />
+    <ClCompile Include="strings.c" />
     <ClCompile Include="tools.c" />
     <ClCompile Include="undo.c" />
   </ItemGroup>
@@ -204,7 +205,6 @@
     <ClInclude Include="smbutil.h" />
     <ClInclude Include="strings.h" />
     <ClInclude Include="string_i.h" />
-    <ClInclude Include="string_j.h" />
     <ClInclude Include="tools.h" />
     <ClInclude Include="undo.h" />
     <ClInclude Include="versinfo.h" />
@@ -234,7 +234,7 @@
     <Text Include="misc\readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resources.eng-us.rc" />
+    <ResourceCompile Include="resources.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

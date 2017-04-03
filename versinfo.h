@@ -11,8 +11,8 @@
 #define VERSINFO_H
 
 #define MAJORVERSION 1
-#define MINORVERSION 8
+#define MINORVERSION 9
 
-#define THISYEAR     2013
+#define THISYEAR     2017
 
 #endif

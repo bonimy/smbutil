@@ -56,7 +56,6 @@ BOOL g_fShowMsgOnSave = TRUE;
 
 
 *****************/
-
 HWND fr_GetStatusBar()
 {
 	return g_hSbWnd;
@@ -64,7 +63,7 @@ HWND fr_GetStatusBar()
 
 int Msg(LPCTSTR lpText, UINT uType)
 {
-	return MessageBox(ghWndMDIClient, lpText, PROGRAMNAME, uType);
+	return MessageBox(ghWndMDIClient, lpText, GetResourceString(IDS_PROGRAMNAME), uType);
 }
 
 UINT CALLBACK OFNHookProc(HWND hDlg,UINT uiMsg,WPARAM wParam,LPARAM lParam)
@@ -269,9 +268,9 @@ void RefreshWindowTitle(BOOL fNeedChanged)
 	LPTSTR cWndTitle = GetTempStringBuffer();
 
 	if(gblIsROMLoaded)
-		wsprintf(cWndTitle,TEXT("%s - %s"),gFilePath, PROGRAMNAME);
+		wsprintf(cWndTitle,TEXT("%s - %s"),gFilePath, GetResourceString(IDS_PROGRAMNAME));
 	else
-		wsprintf(cWndTitle,TEXT("%s"), PROGRAMNAME);
+		wsprintf(cWndTitle,TEXT("%s"), GetResourceString(IDS_PROGRAMNAME));
 
 	if (fNeedChanged)
 		lstrcat(cWndTitle, TEXT("*"));
@@ -655,7 +654,7 @@ void DumpVersion()
 {
 	LPTSTR szBuf = GetTempStringBuffer();
 
-	wsprintf(szBuf,TEXT("----------------- %s Ver.%d.%.2d -----------------"),PROGRAMNAME, MAJORVERSION, MINORVERSION);
+	wsprintf(szBuf,TEXT("----------------- %s Ver.%d.%.2d -----------------"),GetResourceString(IDS_PROGRAMNAME), MAJORVERSION, MINORVERSION);
 	lv_OutputString(szBuf, LOGVIEW_OUTPUTSTRING_CR);
 
 	wsprintf(szBuf,TEXT("(C) 1999-%d M.K.S"), THISYEAR);
@@ -663,7 +662,7 @@ void DumpVersion()
 
     lv_OutputString(TEXT(__DATE__), LOGVIEW_OUTPUTSTRING_CR);
 
-	lv_OutputString(STRING_VERSION_CONTRIBUTION, LOGVIEW_OUTPUTSTRING_CR);
+	lv_OutputString(GetResourceString(IDS_VERSION_CONTRIBUTION), LOGVIEW_OUTPUTSTRING_CR);
 
 }
 
@@ -675,7 +674,7 @@ LRESULT CALLBACK VersionDlgProc( HWND hDlg,UINT message,WPARAM wParam,LPARAM lPa
 		   {
 			   LPTSTR szBuf = GetTempStringBuffer();
 
-			   wsprintf(szBuf,TEXT("%s Ver.%d.%.2d"),PROGRAMNAME, MAJORVERSION, MINORVERSION);
+			   wsprintf(szBuf,TEXT("%s Ver.%d.%.2d"),GetResourceString(IDS_PROGRAMNAME), MAJORVERSION, MINORVERSION);
 			   SetDlgItemText(hDlg, IDC_TITLE, szBuf);
 
 			   wsprintf(szBuf,TEXT("(C) 1999-%d M.K.S"), THISYEAR);
@@ -683,7 +682,7 @@ LRESULT CALLBACK VersionDlgProc( HWND hDlg,UINT message,WPARAM wParam,LPARAM lPa
 
 			   SetDlgItemText(hDlg, IDC_NOTE, TEXT(__DATE__));
 
-			   SetDlgItemText(hDlg, IDC_CONTRIBUTION, STRING_VERSION_CONTRIBUTION);
+			   SetDlgItemText(hDlg, IDC_CONTRIBUTION, GetResourceString(IDS_VERSION_CONTRIBUTION));
 
 			   DumpVersion();
 		   }
@@ -1420,7 +1419,7 @@ BOOL RegisterWndClass(HINSTANCE hInstance,int nCmdShow)
     /* Create the frame */
     ghWndFrame = CreateWindowEx(WS_EX_ACCEPTFILES,
 								FRAMEWNDCLASSNAME,
-			      PROGRAMNAME,
+			      GetResourceString(IDS_PROGRAMNAME),
 			      WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
 			      CW_USEDEFAULT,
 			      CW_USEDEFAULT,
@@ -1482,6 +1481,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPTSTR lpCmdLin
 {
     MSG msg;
 	HACCEL hAccel;
+
+    InitializeResourceStrings(hInstance);
 
 	// Ensure that the common control DLL is loaded
 	InitCommonControls();
