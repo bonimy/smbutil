@@ -216,7 +216,7 @@ void DemoRecorderHandler(BYTE bJoy1Read, BYTE bRet)
 		//
 		gblDemoRecord = FALSE;
 		//
-		SetStatusBarText(STRING_CONFIRM_DEMORECORD2);
+		SetStatusBarText(GetResourceString(IDS_CONFIRM_DEMORECORD2));
 		MessageBeep(MB_OK);
 		//
 //		gblDataChanged = TRUE;
@@ -632,8 +632,8 @@ LRESULT CALLBACK TestPlaySettingDlgProc( HWND hDlg,UINT message,WPARAM wParam,LP
        case WM_INITDIALOG:
 		   {
 			   int n;
-			   LPTSTR StateName[] = {STRING_TESTPLAYSETTING_MARIO, STRING_TESTPLAYSETTING_SUPERMARIO, STRING_TESTPLAYSETTING_FIREMARIO};
-			   LPTSTR StartUnitName[] = {STRING_TESTPLAYSETTING_NONE, STRING_TESTPLAYSETTING_POS, STRING_TESTPLAYSETTING_DOT};
+			   LPTSTR StateName[] = {GetResourceString(IDS_TESTPLAYSETTING_MARIO), GetResourceString(IDS_TESTPLAYSETTING_SUPERMARIO), GetResourceString(IDS_TESTPLAYSETTING_FIREMARIO)};
+			   LPTSTR StartUnitName[] = {GetResourceString(IDS_TESTPLAYSETTING_NONE), GetResourceString(IDS_TESTPLAYSETTING_POS), GetResourceString(IDS_TESTPLAYSETTING_DOT)};
 
 			   if (rm_IsSubRoom())
 				   EnableWindow(GetDlgItem(hDlg, IDC_HALFPAGE), FALSE);

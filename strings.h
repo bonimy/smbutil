@@ -1,14 +1,20 @@
-﻿#ifndef STRINGS_H
+﻿/************************************************************************************
+
+smb Utility
+
+File: string.h
+Description: strings for international version
+History:
+Contributors: Chezzman1, Insectduel, MirracleMXX, Yy, spel werdz rite
+
+************************************************************************************/
+
+#ifndef STRINGS_H
 #define STRINGS_H
+#include "resrc1.h"
+#include <Windows.h>
 
-#ifndef INTERNATIONAL
+void InitializeResourceStrings(HINSTANCE hInstance);
+const LPTSTR GetResourceString(const int id);
 
-#include "string_j.h"
-
-#else
-
-#include "string_i.h"
-
-#endif /* INTERNATIONAL */
-
-#endif /* STRING_H */
+#endif /* STRINGS_H */

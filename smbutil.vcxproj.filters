@@ -2,23 +2,20 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{e195a334-27d7-40af-bde7-a6e34a30129d}</UniqueIdentifier>
+      <UniqueIdentifier>{3aa05e28-754e-405f-a846-6cdf91ea24f3}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{7c1457c2-d669-485a-a387-f0333da369d3}</UniqueIdentifier>
+      <UniqueIdentifier>{b1d959d0-d14c-4f87-a021-ae09f1d5caf2}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{0460a6d6-e745-4c05-bfef-cfaf6c9f1c3e}</UniqueIdentifier>
+      <UniqueIdentifier>{709d5a66-8f71-42ce-82ec-8fa400c5b456}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
     <Filter Include="Document Files">
-      <UniqueIdentifier>{c1f1622a-7682-4715-86a8-979b7adbb472}</UniqueIdentifier>
+      <UniqueIdentifier>{cdd2ceb8-ee02-4002-b2e8-8f15ac993c87}</UniqueIdentifier>
       <Extensions>txt</Extensions>
-    </Filter>
-    <Filter Include="bin">
-      <UniqueIdentifier>{6cab5033-51d9-485f-b372-1308153e6539}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +83,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="undo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strings.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -166,9 +166,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="smbutil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="string_j.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="strings.h">
@@ -260,13 +257,8 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resource_j.rc">
+    <ResourceCompile Include="resources.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\make6502.bat">
-      <Filter>bin</Filter>
-    </None>
   </ItemGroup>
 </Project>
