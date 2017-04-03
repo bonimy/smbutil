@@ -275,7 +275,7 @@ LRESULT CALLBACK EmulatorOptionDlgProc( HWND hDlg,UINT message,WPARAM wParam,LPA
 
 			// joystick ID
 			for (N = 0;N < 2;N++) {
-				wsprintf(szBuf, TEXT("%s%d"), STRING_EMULATOROPTION_JOYSTICK, N + 1);
+				wsprintf(szBuf, TEXT("%s%d"), GetResourceString(IDS_EMULATOROPTION_JOYSTICK), N + 1);
 				SendDlgItemMessage(hDlg, IDC_JOYSTICKID, CB_ADDSTRING, 0, (LPARAM)szBuf);
 			}
 			SendDlgItemMessage(hDlg, IDC_JOYSTICKID, CB_SETCURSEL, g_uEmuJoyID == JOYSTICKID2 ? 1 : 0, 0);

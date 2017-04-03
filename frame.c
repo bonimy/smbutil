@@ -218,7 +218,7 @@ void OptionPropertySheet(HWND hwndOwner,int nStartPage)
 {
 	//TODO
 #define OPTPS_NUM_PAGES 4
-	LPTSTR lpTitle[OPTPS_NUM_PAGES]={STRING_OPTIONDIALOG_EMULATOR, STRING_OPTIONDIALOG_EDITOR, STRING_OPTIONDIALOG_APPLICATION, STRING_OPTIONDIALOG_OBJECTVIEW};
+	LPTSTR lpTitle[OPTPS_NUM_PAGES]={GetResourceString(IDS_OPTIONDIALOG_EMULATOR), GetResourceString(IDS_OPTIONDIALOG_EDITOR), GetResourceString(IDS_OPTIONDIALOG_APPLICATION), GetResourceString(IDS_OPTIONDIALOG_OBJECTVIEW)};
 	LPTSTR lpDlgResName[OPTPS_NUM_PAGES]={TEXT("EMULATOROPTIONDLG"), TEXT("EDITOROPTIONDLG"), TEXT("APPLICATIONOPTIONDLG"), TEXT("OBJECTVIEWOPTIONDLG")};
 	DLGPROC pfnDlgProc[OPTPS_NUM_PAGES]={EmulatorOptionDlgProc, EditorOptionDlgProc, ApplicationOptionDlgProc, ObjectViewOptionDlgProc};
 	//Local
@@ -246,7 +246,7 @@ void OptionPropertySheet(HWND hwndOwner,int nStartPage)
     psh.hwndParent = hwndOwner;
     psh.hInstance = GetModuleHandle(NULL);
     psh.pszIcon = NULL;
-    psh.pszCaption = STRING_OPTIONDIALOG_TITLE;
+    psh.pszCaption = GetResourceString(IDS_OPTIONDIALOG_TITLE);
     psh.nPages = sizeof(psp) / sizeof(PROPSHEETPAGE);
     psh.nStartPage = nStartPage;
     psh.ppsp = (LPCPROPSHEETPAGE) &psp;
@@ -494,11 +494,11 @@ BOOL ConfirmOnExit()
 	{
 		int iRet;
 
-		iRet = Msg(STRING_CONFIRM_EXIT, MB_YESNOCANCEL | MB_ICONINFORMATION);
+		iRet = Msg(GetResourceString(IDS_CONFIRM_EXIT), MB_YESNOCANCEL | MB_ICONINFORMATION);
 		if(iRet == IDYES)
 		{
 			if(!SaveAsFile(gFilePath)){
-				Msg(STRING_FILEERROR_SAVE, MB_OK | MB_ICONWARNING);
+				Msg(GetResourceString(IDS_FILEERROR_SAVE), MB_OK | MB_ICONWARNING);
 				return FALSE;
 			}
 		}
@@ -520,13 +520,13 @@ BOOL LoadCHRROMFromFile(LPTSTR pFileName, BOOL fLoadAll)
 	if (!gblIsROMLoaded) return FALSE;
 
 	if((fp = _tfopen(pFileName, TEXT("rb"))) == NULL){
-		Msg(STRING_FILEERROR_NOTFOUND, MB_OK | MB_ICONWARNING);
+		Msg(GetResourceString(IDS_FILEERROR_NOTFOUND), MB_OK | MB_ICONWARNING);
 		return FALSE;
 	}
 
 	fread(&CHRHead, 1, sizeof(INESHEADER), fp);
 	if(memcmp(CHRHead.cType, "NES\x1a", 4) || (CHRHead.bNum_CHARs != SMB_NUM_CHARS || CHRHead.bNum_PRGs != SMB_NUM_PRGS)){
-		Msg(STRING_FILEERROR_FILEFORMAT, MB_OK | MB_ICONWARNING);
+		Msg(GetResourceString(IDS_FILEERROR_FILEFORMAT), MB_OK | MB_ICONWARNING);
 		fclose(fp);
 		return FALSE;
 	}
@@ -546,7 +546,7 @@ BOOL LoadCHRROMFromFile(LPTSTR pFileName, BOOL fLoadAll)
 
 	fclose(fp);
 
-	wsprintf(szMsg, STRING_LOGVIEW_LOADCHR, pFileName, wCHRValidSize);
+	wsprintf(szMsg, GetResourceString(IDS_LOGVIEW_LOADCHR), pFileName, wCHRValidSize);
 	lv_OutputString(szMsg, LOGVIEW_OUTPUTSTRING_CR);
 
 	return TRUE;
@@ -586,7 +586,7 @@ BOOL LoadROMFromFile()
 	RefreshWindowTitle(FALSE);
 	SetToolBarButtonState(g_hTbWnd);
 
-	wsprintf(szLV, STRING_LOGVIEW_FILEOPEN, gFilePath);
+	wsprintf(szLV, GetResourceString(IDS_LOGVIEW_FILEOPEN), gFilePath);
 	lv_OutputString(szLV, LOGVIEW_OUTPUTSTRING_CR);
 
 	return TRUE;
@@ -637,9 +637,9 @@ BOOL SaveToFile()
 	
 	if(!SaveAsFile(gFilePath)) return FALSE;
 
-	wsprintf(szBuf, STRING_LOGVIEW_FILESAVE, gFilePath);
+	wsprintf(szBuf, GetResourceString(IDS_LOGVIEW_FILESAVE), gFilePath);
 	lv_OutputString(szBuf, LOGVIEW_OUTPUTSTRING_CR);
-	SetStatusBarText(STRING_STATUSBAR_FILESAVE);
+	SetStatusBarText(GetResourceString(IDS_STATUSBAR_FILESAVE));
 
 	return TRUE;
 }
@@ -860,7 +860,7 @@ LONG APIENTRY MDIFrameWndProc (HWND hWnd,UINT msg,UINT	wParam,LONG	lParam)
 				if(!CheckROMFileTime())
 				{
 					blMsg=TRUE;
-					if(IDYES == Msg(STRING_CONFIRM_RELOAD, MB_YESNO | MB_ICONQUESTION))
+					if(IDYES == Msg(GetResourceString(IDS_CONFIRM_RELOAD), MB_YESNO | MB_ICONQUESTION))
 						LoadROMFromFile();
 					else
 						SetROMFileTime();
@@ -878,16 +878,16 @@ LONG APIENTRY MDIFrameWndProc (HWND hWnd,UINT msg,UINT	wParam,LONG	lParam)
 				//tooltip for toolbar
 				TTtext=(LPNMTTDISPINFO)lParam;
 				switch(TTtext->hdr.idFrom){
-					case IDM_FILE_OPEN:TTtext->lpszText = STRING_TOOLTIP_OPEN; break;
-					case IDM_FILE_SAVE:TTtext->lpszText = STRING_TOOLTIP_SAVE; break;
-					case IDM_SETTING_AREA:TTtext->lpszText = STRING_TOOLTIP_ROOM; break;
-					case IDM_SETTING_BADGUYS:TTtext->lpszText = STRING_TOOLTIP_BADGUYS; break;
-					case IDM_SETTING_MAP:TTtext->lpszText = STRING_TOOLTIP_MAP; break;
-					case IDM_EMULATOR_NORMALPLAY:TTtext->lpszText = STRING_TOOLTIP_TESTPLAY; break;
-					case IDM_EMULATOR_PAGEPLAY:TTtext->lpszText = STRING_TOOLTIP_PAGETESTPLAY; break;
-					case IDM_EMULATOR_PAGEPLAYHALF:TTtext->lpszText = STRING_TOOLTIP_HALFPOINTTESTPLAY; break;
-					case IDM_EMULATOR_STOP:TTtext->lpszText = STRING_TOOLTIP_STOP; break;
-					case IDM_EMULATOR_TESTPLAYSETTING:TTtext->lpszText = STRING_TOOLTIP_TESTPLAYSETTING; break;
+					case IDM_FILE_OPEN:TTtext->lpszText = GetResourceString(IDS_TOOLTIP_OPEN); break;
+					case IDM_FILE_SAVE:TTtext->lpszText = GetResourceString(IDS_TOOLTIP_SAVE); break;
+					case IDM_SETTING_AREA:TTtext->lpszText = GetResourceString(IDS_TOOLTIP_ROOM); break;
+					case IDM_SETTING_BADGUYS:TTtext->lpszText = GetResourceString(IDS_TOOLTIP_BADGUYS); break;
+					case IDM_SETTING_MAP:TTtext->lpszText = GetResourceString(IDS_TOOLTIP_MAP); break;
+					case IDM_EMULATOR_NORMALPLAY:TTtext->lpszText = GetResourceString(IDS_TOOLTIP_TESTPLAY); break;
+					case IDM_EMULATOR_PAGEPLAY:TTtext->lpszText = GetResourceString(IDS_TOOLTIP_PAGETESTPLAY); break;
+					case IDM_EMULATOR_PAGEPLAYHALF:TTtext->lpszText = GetResourceString(IDS_TOOLTIP_HALFPOINTTESTPLAY); break;
+					case IDM_EMULATOR_STOP:TTtext->lpszText = GetResourceString(IDS_TOOLTIP_STOP); break;
+					case IDM_EMULATOR_TESTPLAYSETTING:TTtext->lpszText = GetResourceString(IDS_TOOLTIP_TESTPLAYSETTING); break;
 				}
 			}
 		}
@@ -937,11 +937,11 @@ OPENCANCEL:
 		case IDM_FILE_SAVE:
 			if(gblIsROMLoaded){
 				if (g_fShowMsgOnSave){
-					if(IDNO == Msg(STRING_CONFIRM_SAVE, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2))
+					if(IDNO == Msg(GetResourceString(IDS_CONFIRM_SAVE), MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2))
 						break;
 				}
 				while(gFilePath[0]=='\0' || !SaveToFile()){
-					Msg(STRING_FILEERROR_SAVE, MB_OK | MB_ICONWARNING);
+					Msg(GetResourceString(IDS_FILEERROR_SAVE), MB_OK | MB_ICONWARNING);
 					if(!SetSaveFileName(hWnd)) break;
 				}
 				RefreshWindowTitle(FALSE);
@@ -954,7 +954,7 @@ OPENCANCEL:
 					if(SaveToFile())
 						RefreshWindowTitle(FALSE);
 					else
-						Msg(STRING_FILEERROR_SAVEAS, MB_OK | MB_ICONWARNING);			
+						Msg(GetResourceString(IDS_FILEERROR_SAVEAS), MB_OK | MB_ICONWARNING);			
 				}
 			}
 			break;
@@ -972,7 +972,7 @@ OPENCANCEL:
 				fname.lStructSize=sizeof(fname);
 				fname.lpstrInitialDir=curdir;
 				fname.hwndOwner=hWnd;
-				fname.lpstrTitle=STRING_FILEOPENDIALOG_CHRLOAD;
+				fname.lpstrTitle=GetResourceString(IDS_FILEOPENDIALOG_CHRLOAD);
 				fname.lpstrFilter=filefilter;
 				fname.nFilterIndex=0;
 				fname.lpstrFile=filepath;
@@ -1096,7 +1096,7 @@ OPENCANCEL:
 			break;
 		case IDM_TOOL_WORLDDATAUPDATE:
 			if(gblIsROMLoaded
-				&& (IDOK == Msg(STRING_CONFIRM_UPDATEWORLD, MB_OKCANCEL | MB_ICONINFORMATION))){
+				&& (IDOK == Msg(GetResourceString(IDS_CONFIRM_UPDATEWORLD), MB_OKCANCEL | MB_ICONINFORMATION))){
 				LPTSTR szBuf = GetTempStringBuffer();
 				UpdateWorldData(TRUE);
 				wsprintf(szBuf,TEXT("$9CB4 : %.2xH %.2xH %.2xH %.2xH %.2xH %.2xH %.2xH %.2xH"),
@@ -1120,7 +1120,7 @@ OPENCANCEL:
 			break;
 		case IDM_TOOL_DEMORECORD:
 			if(gblIsROMLoaded){
-				if(IDCANCEL == Msg(STRING_CONFIRM_DEMORECORD, MB_OKCANCEL | MB_ICONINFORMATION)) break;
+				if(IDCANCEL == Msg(GetResourceString(IDS_CONFIRM_DEMORECORD), MB_OKCANCEL | MB_ICONINFORMATION)) break;
 				
 				OpenIcon(GetEmuWndHandle());
 				SendMessage(ghWndMDIClient,WM_MDIACTIVATE,(WPARAM)GetEmuWndHandle(),0);
@@ -1189,7 +1189,7 @@ OPENCANCEL:
 		case IDM_EMULATOR_SAVE:
 			if(!gblIsROMLoaded) break;
 			if(SaveEmulatorState())
-				SetStatusBarText(STRING_STATUSBAR_EMUSAVE);
+				SetStatusBarText(GetResourceString(IDS_STATUSBAR_EMUSAVE));
 			break;
 		case IDM_EMULATOR_LOAD:
 			{
@@ -1204,7 +1204,7 @@ OPENCANCEL:
 				if(iTrainer) es.pbTRAINER=bPRGROM+0x7000;
 				if(LoadEmulatorState(&es))
 				{
-					SetStatusBarText(STRING_STATUSBAR_EMULOAD);
+					SetStatusBarText(GetResourceString(IDS_STATUSBAR_EMULOAD));
 					OpenIcon(GetEmuWndHandle());
 					SendMessage(ghWndMDIClient,WM_MDIACTIVATE,(WPARAM)GetEmuWndHandle(),0);
 				}
@@ -1477,12 +1477,23 @@ BOOL RegisterWndClass(HINSTANCE hInstance,int nCmdShow)
 
 }
 
+void InitLocalization(HINSTANCE hInstance, int id)
+{
+    SetThreadLocale(id);
+    SetThreadUILanguage(id);
+
+    InitializeResourceStrings(hInstance);
+    InitializeKeyNames();
+    InitializeToolStrings();
+    InitializeObjectDataStrings();
+}
+
 int WINAPI _tWinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPTSTR lpCmdLine, int nCmdShow)
 {
     MSG msg;
 	HACCEL hAccel;
 
-    InitializeResourceStrings(hInstance);
+    InitLocalization(hInstance, 0x0409);
 
 	// Ensure that the common control DLL is loaded
 	InitCommonControls();

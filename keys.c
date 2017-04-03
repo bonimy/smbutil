@@ -212,47 +212,56 @@ static UINT FindVkeyIndex(BYTE bVkey)
 // NOTE : A, B, SELECT, STARTが最初にくることを前提にして、
 //        ジョイスティックのボタン設定を実装している
 //        (UP, DOWN, LEFT, RIGHTは未使用)
-LPTSTR g_szEmuKeyName[EMULATOR_NUM_BUTTONS] =
-{
-	STRING_KEYCONFIG_EMU_A,//"A",
-	STRING_KEYCONFIG_EMU_B,//"B",
-	STRING_KEYCONFIG_EMU_SELECT,//"ｾﾚｸﾄ",
-	STRING_KEYCONFIG_EMU_START,//"ｽﾀｰﾄ",
-	STRING_KEYCONFIG_EMU_UP,//"上",
-	STRING_KEYCONFIG_EMU_DOWN,//"下",
-	STRING_KEYCONFIG_EMU_LEFT,//"左",
-	STRING_KEYCONFIG_EMU_RIGHT//"右"
-};
+LPTSTR g_szEmuKeyName[EMULATOR_NUM_BUTTONS];
 
-LPTSTR g_szEditKeyName[KEYACCEL_NUM_COMMANDS] =
+LPTSTR g_szEditKeyName[KEYACCEL_NUM_COMMANDS];
+
+void InitializeKeyNames()
 {
-	STRING_KEYCONFIG_EDIT_ADD1,//"種類を+1",
-	STRING_KEYCONFIG_EDIT_DEC1,//"種類を-1",
-	STRING_KEYCONFIG_EDIT_ADD16,//"種類を+16",
-	STRING_KEYCONFIG_EDIT_DEC16,//"種類を-16",
-	STRING_KEYCONFIG_EDIT_UP,//"位置を上へ",
-	STRING_KEYCONFIG_EDIT_DOWN,//"位置を下へ",
-	STRING_KEYCONFIG_EDIT_LEFT,//"位置を左へ",
-	STRING_KEYCONFIG_EDIT_RIGHT,//"位置を右へ",
-	STRING_KEYCONFIG_EDIT_NEXTPAGE,//"次のﾍﾟｰｼﾞへ",
-	STRING_KEYCONFIG_EDIT_PREVPAGE,//"前のﾍﾟｰｼﾞへ",
-	STRING_KEYCONFIG_EDIT_NEXTOBJ,//"次のｵﾌﾞｼﾞｪｸﾄへ",
-	STRING_KEYCONFIG_EDIT_PREVOBJ,//"前のｵﾌﾞｼﾞｪｸﾄへ",
-	STRING_KEYCONFIG_EDIT_SAVEFILE,//"ﾌｧｲﾙ: 上書き保存",
-	STRING_KEYCONFIG_EDIT_UNDO,//"編集: 元に戻す",
-	STRING_KEYCONFIG_EDIT_ROOM,//"編集: ﾙｰﾑを開く",
-	STRING_KEYCONFIG_EDIT_BADGUYS,//"編集: 敵",
-	STRING_KEYCONFIG_EDIT_MAP,//"編集: 地形",
-	STRING_KEYCONFIG_EDIT_TESTPLAY,//"ｴﾐｭﾚｰﾀ: ﾃｽﾄﾌﾟﾚｲ",
-	STRING_KEYCONFIG_EDIT_PAGETESTPLAY,//"ｴﾐｭﾚｰﾀ: ﾍﾟｰｼﾞﾃｽﾄﾌﾟﾚｲ",
-	STRING_KEYCONFIG_EDIT_PAGETESTPLAY2,//"ｴﾐｭﾚｰﾀ: 途中ﾍﾟｰｼﾞﾃｽﾄﾌﾟﾚｲ",
-	STRING_KEYCONFIG_EDIT_STOP,//"ｴﾐｭﾚｰﾀ: 停止",
-	STRING_KEYCONFIG_EDIT_SAVEEMU,//"ｴﾐｭﾚｰﾀ: ｾｰﾌﾞ",
-	STRING_KEYCONFIG_EDIT_LOADEMU,//"ｴﾐｭﾚｰﾀ: ﾛｰﾄﾞ",
-	STRING_KEYCONFIG_EDIT_EMUSETTING,//"ｴﾐｭﾚｰﾀ: ﾃｽﾄﾌﾟﾚｲの設定",
-	STRING_KEYCONFIG_EDIT_NEXTWIN,//"ｳｲﾝﾄﾞｳ: 次へ",
-	STRING_KEYCONFIG_EDIT_PREVWIN,//"ｳｲﾝﾄﾞｳ: 前へ"
-};
+    LPTSTR temp1[EMULATOR_NUM_BUTTONS] =
+    {
+        GetResourceString(IDS_KEYCONFIG_EMU_A),//"A",
+        GetResourceString(IDS_KEYCONFIG_EMU_B),//"B",
+        GetResourceString(IDS_KEYCONFIG_EMU_SELECT),//"ｾﾚｸﾄ",
+        GetResourceString(IDS_KEYCONFIG_EMU_START),//"ｽﾀｰﾄ",
+        GetResourceString(IDS_KEYCONFIG_EMU_UP),//"上",
+        GetResourceString(IDS_KEYCONFIG_EMU_DOWN),//"下",
+        GetResourceString(IDS_KEYCONFIG_EMU_LEFT),//"左",
+        GetResourceString(IDS_KEYCONFIG_EMU_RIGHT)//"右"
+    };
+    memcpy(g_szEmuKeyName, temp1, sizeof(temp1));
+
+    LPTSTR temp2[KEYACCEL_NUM_COMMANDS] =
+    {
+        GetResourceString(IDS_KEYCONFIG_EDIT_ADD1),//"種類を+1",
+        GetResourceString(IDS_KEYCONFIG_EDIT_DEC1),//"種類を-1",
+        GetResourceString(IDS_KEYCONFIG_EDIT_ADD16),//"種類を+16",
+        GetResourceString(IDS_KEYCONFIG_EDIT_DEC16),//"種類を-16",
+        GetResourceString(IDS_KEYCONFIG_EDIT_UP),//"位置を上へ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_DOWN),//"位置を下へ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_LEFT),//"位置を左へ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_RIGHT),//"位置を右へ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_NEXTPAGE),//"次のﾍﾟｰｼﾞへ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_PREVPAGE),//"前のﾍﾟｰｼﾞへ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_NEXTOBJ),//"次のｵﾌﾞｼﾞｪｸﾄへ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_PREVOBJ),//"前のｵﾌﾞｼﾞｪｸﾄへ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_SAVEFILE),//"ﾌｧｲﾙ: 上書き保存",
+        GetResourceString(IDS_KEYCONFIG_EDIT_UNDO),//"編集: 元に戻す",
+        GetResourceString(IDS_KEYCONFIG_EDIT_ROOM),//"編集: ﾙｰﾑを開く",
+        GetResourceString(IDS_KEYCONFIG_EDIT_BADGUYS),//"編集: 敵",
+        GetResourceString(IDS_KEYCONFIG_EDIT_MAP),//"編集: 地形",
+        GetResourceString(IDS_KEYCONFIG_EDIT_TESTPLAY),//"ｴﾐｭﾚｰﾀ: ﾃｽﾄﾌﾟﾚｲ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_PAGETESTPLAY),//"ｴﾐｭﾚｰﾀ: ﾍﾟｰｼﾞﾃｽﾄﾌﾟﾚｲ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_PAGETESTPLAY2),//"ｴﾐｭﾚｰﾀ: 途中ﾍﾟｰｼﾞﾃｽﾄﾌﾟﾚｲ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_STOP),//"ｴﾐｭﾚｰﾀ: 停止",
+        GetResourceString(IDS_KEYCONFIG_EDIT_SAVEEMU),//"ｴﾐｭﾚｰﾀ: ｾｰﾌﾞ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_LOADEMU),//"ｴﾐｭﾚｰﾀ: ﾛｰﾄﾞ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_EMUSETTING),//"ｴﾐｭﾚｰﾀ: ﾃｽﾄﾌﾟﾚｲの設定",
+        GetResourceString(IDS_KEYCONFIG_EDIT_NEXTWIN),//"ｳｲﾝﾄﾞｳ: 次へ",
+        GetResourceString(IDS_KEYCONFIG_EDIT_PREVWIN),//"ｳｲﾝﾄﾞｳ: 前へ"
+    };
+    memcpy(g_szEditKeyName, temp2, sizeof(temp2));
+}
 
 #define CUSTOMIZE_KEYIDS 2
 
@@ -294,10 +303,10 @@ static LPTSTR FormatOverlappedKeyInformation(LPTSTR szBuf,DWORD dwResult)
 	switch(dwResult >> 16)
 	{
 	case CUSTOMIZE_KEYS_ID_EDIT:
-		wsprintf(szBuf, STRING_KEYCONFIG_OVERLAPPED, STRING_KEYCONFIG_KEYACCEL, g_szEditKeyName[dwResult & 0xFFFF]);
+		wsprintf(szBuf, GetResourceString(IDS_KEYCONFIG_OVERLAPPED), GetResourceString(IDS_KEYCONFIG_KEYACCEL), g_szEditKeyName[dwResult & 0xFFFF]);
 		break;
 	case CUSTOMIZE_KEYS_ID_EMU:
-		wsprintf(szBuf, STRING_KEYCONFIG_OVERLAPPED, STRING_KEYCONFIG_EMULATOR, g_szEmuKeyName[dwResult & 0xFFFF]);
+		wsprintf(szBuf, GetResourceString(IDS_KEYCONFIG_OVERLAPPED), GetResourceString(IDS_KEYCONFIG_EMULATOR), g_szEmuKeyName[dwResult & 0xFFFF]);
 		break;
 	}
 	return szBuf;
@@ -336,10 +345,10 @@ LRESULT CALLBACK CustomizeDlgProc( HWND hDlg,UINT message,WPARAM wParam,LPARAM l
 	case WM_INITDIALOG:
 		{
 			UINT N;
-			LPTSTR lpKeyID[CUSTOMIZE_KEYIDS] = {STRING_KEYCONFIG_KEYACCEL, STRING_KEYCONFIG_EMULATOR};
-			LPTSTR lpPreset[KEYACCEL_NUM_PRESETS] = {STRING_KEYCONFIG_PRESET_DESKTOP, STRING_KEYCONFIG_PRESET_NOTE};
-			LPTSTR lpWheel[CUSTOMIZE_WHEEL_NUMFUNCS] = {STRING_KEYCONFIG_WHEEL_NONE, STRING_KEYCONFIG_WHEEL_CTRL, STRING_KEYCONFIG_WHEEL_SHIFT, STRING_KEYCONFIG_WHEEL_SHIFTCTRL};
-			LPTSTR lpWheelFunc[CUSTOMIZE_WHEEL_NUMFUNCS] = {STRING_KEYCONFIG_WHEEL_TYPE1, STRING_KEYCONFIG_WHEEL_TYPE16, STRING_KEYCONFIG_WHEEL_PAGE, STRING_KEYCONFIG_WHEEL_OBJ};
+			LPTSTR lpKeyID[CUSTOMIZE_KEYIDS] = {GetResourceString(IDS_KEYCONFIG_KEYACCEL), GetResourceString(IDS_KEYCONFIG_EMULATOR)};
+			LPTSTR lpPreset[KEYACCEL_NUM_PRESETS] = {GetResourceString(IDS_KEYCONFIG_PRESET_DESKTOP), GetResourceString(IDS_KEYCONFIG_PRESET_NOTE)};
+			LPTSTR lpWheel[CUSTOMIZE_WHEEL_NUMFUNCS] = {GetResourceString(IDS_KEYCONFIG_WHEEL_NONE), GetResourceString(IDS_KEYCONFIG_WHEEL_CTRL), GetResourceString(IDS_KEYCONFIG_WHEEL_SHIFT), GetResourceString(IDS_KEYCONFIG_WHEEL_SHIFTCTRL)};
+			LPTSTR lpWheelFunc[CUSTOMIZE_WHEEL_NUMFUNCS] = {GetResourceString(IDS_KEYCONFIG_WHEEL_TYPE1), GetResourceString(IDS_KEYCONFIG_WHEEL_TYPE16), GetResourceString(IDS_KEYCONFIG_WHEEL_PAGE), GetResourceString(IDS_KEYCONFIG_WHEEL_OBJ)};
 			LPTSTR  szButtonName = GetTempStringBuffer();
 
 			//---------------
@@ -370,7 +379,7 @@ LRESULT CALLBACK CustomizeDlgProc( HWND hDlg,UINT message,WPARAM wParam,LPARAM l
 				SendDlgItemMessage(hDlg,IDC_JOYBUTTONLIST,LB_ADDSTRING,0,(LPARAM)g_szEmuKeyName[N]);
 			// コンボボックスにジョイスティックのボタン名を追加
 			for(N=0;N<JOYSTICK_MAX_BUTTONS;N++) {
-				wsprintf(szButtonName, STRING_KEYCONFIG_BUTTONX, N + 1);
+				wsprintf(szButtonName, GetResourceString(IDS_KEYCONFIG_BUTTONX), N + 1);
 				SendDlgItemMessage(hDlg,IDC_JOYBUTTONVALUE,CB_ADDSTRING,0,(LPARAM)szButtonName);
 			}
 			
@@ -578,7 +587,7 @@ LRESULT CALLBACK CustomizeDlgProc( HWND hDlg,UINT message,WPARAM wParam,LPARAM l
 				{
 					if(wNotifyCode == BN_CLICKED)
 					{
-						if(IDNO==Msg(STRING_KEYCONFIG_INITIALIZE, MB_YESNO | MB_ICONQUESTION))
+						if(IDNO==Msg(GetResourceString(IDS_KEYCONFIG_INITIALIZE), MB_YESNO | MB_ICONQUESTION))
 							break;
 
 						GetPresetEditorKeys(&bEditVKeys[0], SendDlgItemMessage(hDlg, IDC_PRESET, CB_GETCURSEL, 0, 0));
@@ -692,7 +701,7 @@ LRESULT CALLBACK CustomizeDlgProc( HWND hDlg,UINT message,WPARAM wParam,LPARAM l
 								REG_BINARY,
 								dwEmuJoyButtons,
 								EMULATOR_NUM_JOYBUTTONS * sizeof(DWORD));
-				Msg(STRING_KEYCONFIG_NOTIFY, MB_OK | MB_ICONINFORMATION);
+				Msg(GetResourceString(IDS_KEYCONFIG_NOTIFY), MB_OK | MB_ICONINFORMATION);
 			case IDCANCEL:
 				EndDialog(hDlg,FALSE);
 				return TRUE;

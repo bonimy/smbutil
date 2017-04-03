@@ -189,14 +189,14 @@ static void RefreshMapViewWindowTitle()
 	{
 		GetWindowText(ghMapViewWnd, cCurWndTitle, 49);
 		if(giWndPages)
-			wsprintf(cWndTitle, STRING_OBJVIEW_TITLE2, STRING_WINDOW_OBJVIEW, giMapViewPageBase, giMapViewPageBase+giWndPages);
+			wsprintf(cWndTitle, GetResourceString(IDS_OBJVIEW_TITLE2), GetResourceString(IDS_WINDOW_OBJVIEW), giMapViewPageBase, giMapViewPageBase+giWndPages);
 		else
-			wsprintf(cWndTitle, STRING_OBJVIEW_TITLE, STRING_WINDOW_OBJVIEW, giMapViewPageBase);
+			wsprintf(cWndTitle, GetResourceString(IDS_OBJVIEW_TITLE), GetResourceString(IDS_WINDOW_OBJVIEW), giMapViewPageBase);
 		if(lstrcmp(cCurWndTitle, cWndTitle))
 			SetWindowText(ghMapViewWnd,cWndTitle);
 	}
 	else
-		SetWindowText(ghMapViewWnd, STRING_WINDOW_OBJVIEW);
+		SetWindowText(ghMapViewWnd, GetResourceString(IDS_WINDOW_OBJVIEW));
 }
 
 /***********************
@@ -411,7 +411,7 @@ static void DrawPosLines()
 	SetBkColor(hdc, crPrevBk);
 	SetBkMode(hdc, iPrevBkMode);
 	SetROP2(hdc, iPrevRop);
-	// delete objet
+	// delete object
 	DeleteObject(hPen);
 	DeleteObject(hPenPage);
 
@@ -653,7 +653,7 @@ void DrawAssistObjectMap()
 					FormatMapString(ObjSeek.pbData, lpText);
 					lpText2 = GetTempStringBuffer2();
 					if (tx != x || ty != y)
-						wsprintf(lpText2, STRING_OBJVIEW_TOOLTIP, ObjSeek.dwPage, (x - uBaseX) / OBJVIEW_CHARACTER_WIDTH, y / OBJVIEW_CHARACTER_WIDTH - 1, lpText);
+						wsprintf(lpText2, GetResourceString(IDS_OBJVIEW_TOOLTIP), ObjSeek.dwPage, (x - uBaseX) / OBJVIEW_CHARACTER_WIDTH, y / OBJVIEW_CHARACTER_WIDTH - 1, lpText);
 					else
 						lpText2 = lpText;
 					AddToolToObjectViewToolTip(XPOSLABEL_HEIGHT+x,YPOSLABEL_WIDTH+y,lpText2,id++);
@@ -687,7 +687,7 @@ void DrawAssistObjectMap()
 					FormatBadGuysString(ObjSeek.pbData,lpText);
 					lpText2 = GetTempStringBuffer2();
 					if (tx != x || ty != y)
-						wsprintf(lpText2, STRING_OBJVIEW_TOOLTIP, ObjSeek.dwPage, (x - uBaseX) / OBJVIEW_CHARACTER_WIDTH, y / OBJVIEW_CHARACTER_WIDTH - 1, lpText);
+						wsprintf(lpText2, GetResourceString(IDS_OBJVIEW_TOOLTIP), ObjSeek.dwPage, (x - uBaseX) / OBJVIEW_CHARACTER_WIDTH, y / OBJVIEW_CHARACTER_WIDTH - 1, lpText);
 					else
 						lpText2 = lpText;
 					AddToolToObjectViewToolTip(XPOSLABEL_HEIGHT+x,YPOSLABEL_WIDTH+y,lpText2,id++);
@@ -1004,7 +1004,7 @@ static BOOL ObjviewObjPos2MousePos(LPOBJVIEWMOUSEINPUT lpMouseInput,LPPOINT lpPt
 		|| IsBadReadPtr(lpPt,sizeof(POINT)))
 		return FALSE;
 
-	// charcters
+	// characters
 	lpPt->x=CHARCTERS_PER_PAGE*(lpMouseInput->Page-giMapViewPageBase);
 	if(lpPt->x<0) return FALSE;
 	lpPt->x+=lpMouseInput->X;
@@ -1577,7 +1577,7 @@ HWND CreateMapViewWnd(HINSTANCE hInstance,HWND hWndMDIClient)
 
 	//WS_VISIBLEを指定して作成しないと、Windowﾒﾆｭｰにｳｲﾝﾄﾞｳが追加されない。
 	hWnd=CreateMDIWindow(MAPVIEWWNDCLASSNAME,
-		            STRING_WINDOW_OBJVIEW,
+		            GetResourceString(IDS_WINDOW_OBJVIEW),
 					WS_SYSMENU|WS_MINIMIZEBOX|WS_CAPTION|WS_THICKFRAME|WS_CLIPCHILDREN|WS_VISIBLE,
 					60,//CW_USEDEFAULT,
 					40,//CW_USEDEFAULT,

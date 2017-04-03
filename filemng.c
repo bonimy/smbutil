@@ -64,13 +64,13 @@ BOOL LoadROM(LPTSTR pFilename)
 	gblIsROMLoaded=FALSE;
 
 	if((fp=_tfopen(pFilename,TEXT("rb")))==NULL){
-		Msg(STRING_FILEERROR_NOTFOUND, MB_OK|MB_ICONWARNING);
+		Msg(GetResourceString(IDS_FILEERROR_NOTFOUND), MB_OK|MB_ICONWARNING);
 		return FALSE;
 	}
 
 	fread(&Head,1,sizeof(INESHEADER),fp);
 	if(memcmp(Head.cType,"NES\x1a",4) || (Head.bNum_CHARs!=SMB_NUM_CHARS || Head.bNum_PRGs!=SMB_NUM_PRGS) || ((Head.bROM_Type&0x01)!=0x01)){
-		Msg(STRING_FILEERROR_FILEFORMAT, MB_OK|MB_ICONWARNING);
+		Msg(GetResourceString(IDS_FILEERROR_FILEFORMAT), MB_OK|MB_ICONWARNING);
 		fclose(fp);
 		return FALSE;
 	}

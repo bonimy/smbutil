@@ -31,26 +31,7 @@ typedef struct
 
 #define SMB_STRING_MAXCHARS (27 * 3 + 1)
 
-SMBSTRINGINFO smbStringData[]={STRING_STRINGDATA_01, 5,  0, 0x8755,
-							   STRING_STRINGDATA_02, 5,  0, 0x879B,
-							   STRING_STRINGDATA_03, 5,  0, 0x87AE,
-                               STRING_STRINGDATA_04, 5,  0, 0x87ed,
-							   STRING_STRINGDATA_05, 11, 0, 0x875D,
-							   STRING_STRINGDATA_06, 5,  0, 0x8786,
-							   STRING_STRINGDATA_07, 7,  0, 0x87a3,
-							   STRING_STRINGDATA_08, 9,  0, 0x87b6,
-							   STRING_STRINGDATA_09, 21, 0, 0x87c3,
-							   STRING_STRINGDATA_10, 16, 0, 0x8d57,
-							   STRING_STRINGDATA_11, 16, 0, 0x8d6b,
-							   STRING_STRINGDATA_12, 22, 0, 0x8d7f,
-							   STRING_STRINGDATA_13, 15, 0, 0x8d98,
-							   STRING_STRINGDATA_14, 19, 0, 0x8dab,
-							   STRING_STRINGDATA_15, 27, 0, 0x8dc2,
-							   STRING_STRINGDATA_16, 13, 0, 0x8de1,
-							   STRING_STRINGDATA_17, 17, 0, 0x8df2,
-							   STRING_STRINGDATA_18, 14, 1, 0x1fa5,
-							   STRING_STRINGDATA_19, 13, 1, 0x1fb6,
-							   STRING_STRINGDATA_20, 13, 1, 0x1fc6};
+SMBSTRINGINFO smbStringData[20];
 
 static TCHAR ConvertData2TChar(BYTE bData)
 {
@@ -404,11 +385,40 @@ typedef struct
 	BYTE bGfxData[4];
 }POLEGFXDATAINFO;
 
-POLEGFXDATAINFO PoleGfxInfo[]={
-	STRING_POLEGFX_DEFAULT, "\x24\x2F\x24\x3D",
-	STRING_POLEGFX_ROPE,    "\xA2\xA2\xA3\xA3",
-	STRING_POLEGFX_TREE,    "\xBE\xBE\xBF\xBF",
-	STRING_POLEGFX_OTHER,   "\xFF\xFF\xFF\xFF"};
+POLEGFXDATAINFO PoleGfxInfo[4];
+
+void InitializeToolStrings()
+{
+    POLEGFXDATAINFO temp1[4] = {
+        GetResourceString(IDS_POLEGFX_DEFAULT), "\x24\x2F\x24\x3D",
+        GetResourceString(IDS_POLEGFX_ROPE),    "\xA2\xA2\xA3\xA3",
+        GetResourceString(IDS_POLEGFX_TREE),    "\xBE\xBE\xBF\xBF",
+        GetResourceString(IDS_POLEGFX_OTHER),   "\xFF\xFF\xFF\xFF" };
+    memcpy(PoleGfxInfo, temp1, sizeof(temp1));
+
+    SMBSTRINGINFO temp2[20] = {
+        GetResourceString(IDS_STRINGDATA_01), 5,  0, 0x8755,
+        GetResourceString(IDS_STRINGDATA_02), 5,  0, 0x879B,
+        GetResourceString(IDS_STRINGDATA_03), 5,  0, 0x87AE,
+        GetResourceString(IDS_STRINGDATA_04), 5,  0, 0x87ed,
+        GetResourceString(IDS_STRINGDATA_05), 11, 0, 0x875D,
+        GetResourceString(IDS_STRINGDATA_06), 5,  0, 0x8786,
+        GetResourceString(IDS_STRINGDATA_07), 7,  0, 0x87a3,
+        GetResourceString(IDS_STRINGDATA_08), 9,  0, 0x87b6,
+        GetResourceString(IDS_STRINGDATA_09), 21, 0, 0x87c3,
+        GetResourceString(IDS_STRINGDATA_10), 16, 0, 0x8d57,
+        GetResourceString(IDS_STRINGDATA_11), 16, 0, 0x8d6b,
+        GetResourceString(IDS_STRINGDATA_12), 22, 0, 0x8d7f,
+        GetResourceString(IDS_STRINGDATA_13), 15, 0, 0x8d98,
+        GetResourceString(IDS_STRINGDATA_14), 19, 0, 0x8dab,
+        GetResourceString(IDS_STRINGDATA_15), 27, 0, 0x8dc2,
+        GetResourceString(IDS_STRINGDATA_16), 13, 0, 0x8de1,
+        GetResourceString(IDS_STRINGDATA_17), 17, 0, 0x8df2,
+        GetResourceString(IDS_STRINGDATA_18), 14, 1, 0x1fa5,
+        GetResourceString(IDS_STRINGDATA_19), 13, 1, 0x1fb6,
+        GetResourceString(IDS_STRINGDATA_20), 13, 1, 0x1fc6 };
+    memcpy(smbStringData, temp2, sizeof(temp2));
+}
 
 int GetPoleGfxDatas()
 {
@@ -451,7 +461,7 @@ LRESULT CALLBACK GameSettingDlgProc( HWND hDlg,UINT message,WPARAM wParam,LPARAM
 					SendDlgItemMessage(hDlg,IDC_TIME200,CB_ADDSTRING,0,(LPARAM)cBuf);
 				}
 
-				wsprintf(cBuf, STRING_UNKNOWN);				
+				wsprintf(cBuf, GetResourceString(IDS_UNKNOWN));				
 				i=bPRGROM[SMB_TIME];
 				if(i>9){
 					SendDlgItemMessage(hDlg,IDC_TIME400,CB_ADDSTRING,0,(LPARAM)cBuf);
@@ -542,14 +552,14 @@ LRESULT CALLBACK GameSetting1upDlgProc( HWND hDlg,UINT message,WPARAM wParam,LPA
 			   int n;
 			   TCHAR cBuf[20];
 			   ADDRESSDATA ad1up;
-			   //lpbBuf=Malloc(GetNumWorlds());
+			   //lpbBuf=malloc(GetNumWorlds());
 			   if(lpbBuf){
 				   ADDRESSDATA_LOAD(ad1up, SMB_COINSFOR1UP_ADDRESS);
 				   //１upｷﾉｺのためのｺｲﾝの枚数
 				   memcpy(lpbBuf, bPRGROM + ADDRESSDATA_GET(ad1up), GetNumWorlds());
 				   
 				   for(n = 0; n < GetNumWorlds(); n++){
-					   wsprintf(cBuf, STRING_SETTING_WORLDX, n + 1);
+					   wsprintf(cBuf, GetResourceString(IDS_SETTING_WORLDX), n + 1);
 					   SendDlgItemMessage(hDlg,IDC_WORLD,CB_ADDSTRING,0,(LPARAM)cBuf);
 				   }
 				   SendDlgItemMessage(hDlg,IDC_WORLD,CB_SETCURSEL,0,0);
@@ -714,7 +724,7 @@ LRESULT CALLBACK GameSettingKoopaDlgProc( HWND hDlg,UINT message,WPARAM wParam,L
 				   memcpy(lpbBuf, bPRGROM + ADDRESSDATA_GET(adKoopa), GetNumWorlds());
 				   
 				   for(n=0;n<GetNumWorlds();n++){
-					   wsprintf(cBuf, STRING_SETTING_WORLDX, n + 1);
+					   wsprintf(cBuf, GetResourceString(IDS_SETTING_WORLDX), n + 1);
 					   SendDlgItemMessage(hDlg,IDC_KOOPAWORLD,CB_ADDSTRING,0,(LPARAM)cBuf);
 				   }
 				   SendDlgItemMessage(hDlg,IDC_KOOPAWORLD,CB_SETCURSEL,0,0);
@@ -869,7 +879,7 @@ void GameSettingPropertySheet(HWND hwndOwner)
 {
 	//TODO
 #define OPTPS_NUM_PAGES 5
-	LPTSTR lpTitle[OPTPS_NUM_PAGES]={STRING_SETTING_WARPZONE, STRING_SETTING_1UP, STRING_SETTING_KOOPA, STRING_SETTING_WORLD, STRING_SETTING_OTHER};
+	LPTSTR lpTitle[OPTPS_NUM_PAGES]={GetResourceString(IDS_SETTING_WARPZONE), GetResourceString(IDS_SETTING_1UP), GetResourceString(IDS_SETTING_KOOPA), GetResourceString(IDS_SETTING_WORLD), GetResourceString(IDS_SETTING_OTHER)};
 	LPTSTR lpDlgResName[OPTPS_NUM_PAGES]={TEXT("GAMESETTINGWARPZONEDLG"),TEXT("GAMESETTING1UPDLG"),TEXT("GAMESETTINGKOOPADLG"),TEXT("GAMESETTINGWORLDDLG"),TEXT("GAMESETTINGDLG")};
 	DLGPROC pfnDlgProc[OPTPS_NUM_PAGES]={GameSettingWarpZoneDlgProc,GameSetting1upDlgProc,GameSettingKoopaDlgProc,GameSettingWorldDlgProc,GameSettingDlgProc};
 	//Local
@@ -893,7 +903,7 @@ void GameSettingPropertySheet(HWND hwndOwner)
     psh.hwndParent = hwndOwner;
     psh.hInstance = GetModuleHandle(NULL);
     psh.pszIcon = NULL;
-    psh.pszCaption = STRING_SETTING_TITLE;
+    psh.pszCaption = GetResourceString(IDS_SETTING_TITLE);
     psh.nPages = sizeof(psp) / sizeof(PROPSHEETPAGE);
     psh.nStartPage = 0;
     psh.ppsp = (LPCPROPSHEETPAGE) &psp;

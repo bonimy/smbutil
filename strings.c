@@ -21,10 +21,11 @@ void InitializeResourceStrings(HINSTANCE hInstance)
     }
 }
 
-const TCHAR* GetResourceString(const int id)
+const LPTSTR GetResourceString(const int id)
 {
     if (id < _IDS_MIN || id > _IDS_MAX)
         return NULL;
+    LPTSTR result = _GET_IDS(id);
     return _GET_IDS(id);
 }
 

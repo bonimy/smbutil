@@ -78,7 +78,7 @@ void FormatMapString(LPBYTE lpbBuf,LPTSTR lpszBuf)
 	switch((lpbBuf[0]&0x0f))
 	{
 	case 0x0C:
-		wsprintf(lpszBuf, STRING_OBJLIST_LENNAME, (lpbBuf[1] & 0x0F) + 1, smbMapObjectInfoC[(lpbBuf[1] >> 4) & 0x07].Name);
+		wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_LENNAME), (lpbBuf[1] & 0x0F) + 1, smbMapObjectInfoC[(lpbBuf[1] >> 4) & 0x07].Name);
 		break;
 	case 0x0D:
 		if(!(lpbBuf[1]&0x40))
@@ -87,59 +87,59 @@ void FormatMapString(LPBYTE lpbBuf,LPTSTR lpszBuf)
 			if((lpbBuf[1]&0x70)==0x40)
 				wsprintf(lpszBuf, TEXT("%s"), smbMapObjectInfoD[(lpbBuf[1] & 0x0F) + 1].Name);
 			else
-				wsprintf(lpszBuf, STRING_OBJLIST_UNKNOWN);
+				wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_UNKNOWN));
 		}
 		break;
 	case 0x0E:
 		if(lpbBuf[1]&0x40)
-			wsprintf(lpszBuf, STRING_OBJLIST_BACK, smbMapHeadBackColor[lpbBuf[1] & 0x07]);
+			wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_BACK), smbMapHeadBackColor[lpbBuf[1] & 0x07]);
 		else
-			wsprintf(lpszBuf, STRING_OBJLIST_VIEWBLOCK, smbMapHeadView[(lpbBuf[1] >> 4) & 0x03], smbMapBasicBlock[lpbBuf[1] & 0x0F].Name);
+			wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_VIEWBLOCK), smbMapHeadView[(lpbBuf[1] >> 4) & 0x03], smbMapBasicBlock[lpbBuf[1] & 0x0F].Name);
 		break;
 	case 0x0F:
 		{
 			switch((lpbBuf[1]>>4)&0x07)
 			{
 			case 0:
-				wsprintf(lpszBuf, STRING_OBJLIST_ROPE);
+				wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_ROPE));
 				break;
 			// オブジェクトのデータベースの都合(1と4,5との間には、追加の要素が1つ入っているため)により、
 			// 1と4,5は違う処理
 			case 1:
-				wsprintf(lpszBuf, STRING_OBJLIST_LENNAME, (lpbBuf[1] & 0x0F) + 1, smbMapObjectInfoF[((lpbBuf[1] >> 4) & 0x07)].Name);
+				wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_LENNAME), (lpbBuf[1] & 0x0F) + 1, smbMapObjectInfoF[((lpbBuf[1] >> 4) & 0x07)].Name);
 				break;
 			case 4:
 			case 5:
-				wsprintf(lpszBuf, STRING_OBJLIST_LENNAME, (lpbBuf[1] & 0x0F) + 1, smbMapObjectInfoF[((lpbBuf[1] >> 4) & 0x07) + 1].Name);
+				wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_LENNAME), (lpbBuf[1] & 0x0F) + 1, smbMapObjectInfoF[((lpbBuf[1] >> 4) & 0x07) + 1].Name);
 				break;
 			case 2:
 				{
 					BYTE bHeight;
 					bHeight = lpbBuf[1] & 0x0F;
 					if(0x00 <= bHeight && bHeight <= 0x0B)
-						wsprintf(lpszBuf, STRING_OBJLIST_LENCASTLE, 0x0B - bHeight + 1);
+						wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_LENCASTLE), 0x0B - bHeight + 1);
 					else
-						wsprintf(lpszBuf, STRING_OBJLIST_CRASH);
+						wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_CRASH));
 				}
 				break;
 			case 3:
 				if(!((lpbBuf[1]>>3)&0x01))
-					wsprintf(lpszBuf,STRING_OBJLIST_STEP,(lpbBuf[1]&0x07)+1,(lpbBuf[1]&0x07)+1);
+					wsprintf(lpszBuf,GetResourceString(IDS_OBJLIST_STEP),(lpbBuf[1]&0x07)+1,(lpbBuf[1]&0x07)+1);
 				else
 				{
 					BYTE bLower;
 					bLower=(lpbBuf[1]&0x07);
 					if(0<= bLower && bLower <=0x03)
-						wsprintf(lpszBuf, STRING_OBJLIST_STEP98);
+						wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_STEP98));
 					else if(0x04<= bLower && bLower <=0x06)
-						wsprintf(lpszBuf, STRING_OBJLIST_STEP98_2);
+						wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_STEP98_2));
 					else if(0x07==bLower)
-						wsprintf(lpszBuf, STRING_OBJLIST_STEP98_2);
+						wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_STEP98_2));
 				}
 				break;
 			case 6:
 			case 7:
-				wsprintf(lpszBuf, STRING_OBJLIST_NONE);
+				wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_NONE));
 				break;
 			}
 		}
@@ -149,13 +149,13 @@ void FormatMapString(LPBYTE lpbBuf,LPTSTR lpszBuf)
 			wsprintf(lpszBuf,TEXT("%s"),smbMapObjectInfo0B[lpbBuf[1] & 0x0F].Name);
 		}
 		else if((lpbBuf[1]&0x70)!=0x70){
-			wsprintf(lpszBuf, STRING_OBJLIST_LENNAME, (lpbBuf[1] & 0x0F) + 1, smbMapObjectInfo0B[0x0F + ((lpbBuf[1] >> 4) & 0x07)].Name);
+			wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_LENNAME), (lpbBuf[1] & 0x0F) + 1, smbMapObjectInfo0B[0x0F + ((lpbBuf[1] >> 4) & 0x07)].Name);
 		}
 		else{
 			if(lpbBuf[1]&0x08)//土管
-				wsprintf(lpszBuf, STRING_OBJLIST_LENNAME,(lpbBuf[1] & 0x07) + 1, smbMapObjectInfo0B[0x17].Name);
+				wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_LENNAME),(lpbBuf[1] & 0x07) + 1, smbMapObjectInfo0B[0x17].Name);
 			else
-				wsprintf(lpszBuf, STRING_OBJLIST_LENNAME,(lpbBuf[1] & 0x0F) + 1, smbMapObjectInfo0B[0x16].Name);
+				wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_LENNAME),(lpbBuf[1] & 0x0F) + 1, smbMapObjectInfo0B[0x16].Name);
 		}
 		break;
 	}/* switch */
@@ -226,18 +226,18 @@ CANCEL_SET_ITEM_TEXT:
 ***************************************************/
 void FormatBadGuysString(LPBYTE lpbBuf,LPTSTR lpszBuf)
 {
-	LPTSTR bit6[]={TEXT(""), STRING_OBJLIST_HARD};
+	LPTSTR bit6[]={TEXT(""), GetResourceString(IDS_OBJLIST_HARD)};
 
 	switch(lpbBuf[0]&0x0F)
 	{
 	case 0x0E://ルーム間移動の命令（３バイト）
 		{
-			LPTSTR lpAttr[] = {STRING_SEA, STRING_SKY, STRING_UNDERGROUND, STRING_CASTLE}; 
-			wsprintf(lpszBuf, STRING_OBJLIST_ROOM, lpbBuf[1] & 0x7F, lpAttr[(lpbBuf[1] >> 5) & 0x03], ((lpbBuf[2] >> 5) & 0x07) + 1,lpbBuf[2] & 0x1F);
+			LPTSTR lpAttr[] = {GetResourceString(IDS_SEA), GetResourceString(IDS_SKY), GetResourceString(IDS_UNDERGROUND), GetResourceString(IDS_CASTLE)}; 
+			wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_ROOM), lpbBuf[1] & 0x7F, lpAttr[(lpbBuf[1] >> 5) & 0x03], ((lpbBuf[2] >> 5) & 0x07) + 1,lpbBuf[2] & 0x1F);
 		}
 		break;
 	case 0x0F://送りコマンド（２バイト）
-		wsprintf(lpszBuf, STRING_OBJLIST_PAGECOMMAND, lpbBuf[1] & 0x3F);
+		wsprintf(lpszBuf, GetResourceString(IDS_OBJLIST_PAGECOMMAND), lpbBuf[1] & 0x3F);
 		break;
 	default://（敵キャラコマンド）
 		{
@@ -361,7 +361,7 @@ LRESULT CALLBACK MapComHeadEditDlgProc( HWND hDlg,UINT message,WPARAM wParam,LPA
 			   register int n;
 			   BYTE bRoomID;
 			   BYTE bBuf[2];
-			   LPTSTR AttrName[]={STRING_SEA,STRING_SKY,STRING_UNDERGROUND,STRING_CASTLE};
+			   LPTSTR AttrName[]={GetResourceString(IDS_SEA),GetResourceString(IDS_SKY),GetResourceString(IDS_UNDERGROUND),GetResourceString(IDS_CASTLE)};
 
 			   //ルームの属性
 			   for(n=0;n<4;n++)
@@ -548,10 +548,10 @@ static BOOL InitListView(HWND hwndListView)
 {
 	LV_COLUMN lvColumn;
 	int i;
-	TCHAR szString[LISTVIEW_COLUMNS][20] = {STRING_OBJLIST_COLUMN_BIN,
-											STRING_OBJLIST_COLUMN_PAGE,
-											STRING_OBJLIST_COLUMN_POS,
-											STRING_OBJLIST_COLUMN_TYPE};
+	LPTSTR szString[LISTVIEW_COLUMNS] = {GetResourceString(IDS_OBJLIST_COLUMN_BIN),
+										 GetResourceString(IDS_OBJLIST_COLUMN_PAGE),
+										 GetResourceString(IDS_OBJLIST_COLUMN_POS),
+										 GetResourceString(IDS_OBJLIST_COLUMN_TYPE)};
 	int iWidth[LISTVIEW_COLUMNS]={50,45,55,200};
 
 	//empty the list
@@ -648,7 +648,7 @@ long FAR PASCAL MapEditWndProc( HWND hWnd,UINT message,WPARAM wParam,LPARAM lPar
 //			case NM_KILLFOCUS:
 				{
 					if(gblIsROMLoaded){
-						// set a scroll bar ensureing cursole is visible 
+						// set a scroll bar ensuring cursor is visible 
 						ListView_EnsureVisible(g_hWndListView,GetSelectedIndex(),FALSE);
 					}
 				}
@@ -715,7 +715,7 @@ HWND CreateMapEditWnd(HINSTANCE hInstance,HWND hWndMDIClient)
 
 	//WS_VISIBLEを指定して作成しないと、Windowﾒﾆｭｰにｳｲﾝﾄﾞｳが追加されない。
 	hWnd=CreateMDIWindow(MAPEDITWNDCLASSNAME,
-		            STRING_WINDOW_OBJLIST,
+		            GetResourceString(IDS_WINDOW_OBJLIST),
 					WS_OVERLAPPEDWINDOW|WS_CLIPCHILDREN|WS_VISIBLE,
 					90,//CW_USEDEFAULT,
 					60,//CW_USEDEFAULT,

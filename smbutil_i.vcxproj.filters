@@ -168,9 +168,6 @@
     <ClInclude Include="smbutil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="string_i.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="strings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
