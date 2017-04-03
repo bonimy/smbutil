@@ -46,7 +46,7 @@ static WORD ExecuteCPU()
 		g_bInVBlank = TRUE;
 		// Set vblank flag
 		bPPUStaReg |= 0x80;
-		// if nessesary, execute NMI.
+		// if necessary, execute NMI.
 		if(bPPUCtrlReg1 & 0x80) m6502zpnmi();
 		return ++wScanline;
 	}

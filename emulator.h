@@ -58,8 +58,8 @@ typedef struct
 	BYTE bBackObject2;//$744
 	BYTE bLeftObjOfs[3];
 	BYTE bLeftObjNum[3];
-	BYTE bLeftObjData1;//階段$734
-	BYTE bLeftObjData2[3];//キノコの島$737
+	BYTE bLeftObjData1;//階段$734 - stage
+	BYTE bLeftObjData2[3];//キノコの島$737 - Mushroom Island
 	BYTE bMapOfs;//$072C
 	BYTE bMapPage;//$072A
 	BYTE bMapPageFlag;//$072B
@@ -68,8 +68,8 @@ typedef struct
 	BYTE bBadGuysPageFlag;//$073B
 	BYTE bBadGuysPage2;//$071B
 	BYTE bWorld;
-	BYTE bArea; //$075C 通常のもの
-	BYTE bArea2;//$0760 導入面も１つのエリアに数える
+	BYTE bArea; //$075C 通常のもの - ordinary ones
+	BYTE bArea2;//$0760 導入面も１つのエリアに数える - The introduction side also counts in one area
 	BYTE bIsCleared;//0 -NO, 1 -YES
 	BYTE bIsDifficult;
 	BYTE bMarioSize;//$0756 0-large 1-small
@@ -82,8 +82,8 @@ typedef struct
 	BYTE bRoomID;
 	BYTE bPage;
 	BYTE bWorld;
-	BYTE bArea;//$075C 通常のもの
-	BYTE bArea2;//$0760 導入面も１つのエリアに数える
+	BYTE bArea;//$075C 通常のもの - ordinary ones
+	BYTE bArea2;//$0760 導入面も１つのエリアに数える - The introduction side also counts in one area
 	BYTE bIsCleared;//0 -NO, 1 -YES
 	BYTE bIsDifficult;
 	BYTE bMarioSize;//$0756 0-large 1-small
@@ -130,6 +130,7 @@ BOOL RegisterEmuWndClass(HINSTANCE hInstance);
 HWND CreateEmulatorWnd(HINSTANCE hInstance,HWND hWndMDIClient);
 BOOL PrepareVROMData(BYTE *pbSource);
 //ｴﾐｭﾚｰﾀ ｳｲﾝﾄﾞｳの基本制御
+//Basic control of the emulator window
 void StartEmulator(void);
 void StopEmulator(void);
 BOOL SuspendEmulator(BOOL blState);//blState == TRUE ->suspend, blState == FALSE ->start
@@ -165,21 +166,28 @@ LRESULT CALLBACK EmulatorOptionDlgProc( HWND hDlg,UINT message,WPARAM wParam,LPA
 BOOL LoadEmuKeySetting();
 
 // キーボードのボタン WORD型の要素数EMULATOR_NUM_BUTTONSの配列
+// keyboard buttons WORD type number of elements EMULATOR_NUM_BUTTONS array
 BOOL GetEmulatorVKeys(WORD aEmuKeys[]);
 BOOL GetDefaultEmulatorKeys(WORD aEmuKeys[]);
 // ジョイスティックのボタン DWORD型の要素数EMULATOR_NUM_JOYBUTTONSの配列
+// Array of joystick buttons DWORD type elements EMULATOR_NUM_JOYBUTTONS
 BOOL GetEmulatorJoyButtons(DWORD aEmuJoyButtons[]);
 
 
 // 方向キーを含めたボタン数
+// number of buttons including direction keys
 #define EMULATOR_NUM_BUTTONS 8
 // 方向キーを除いたジョイスティックでボタンの入力として受け取るA, B, Select, Startの4つ
+// Four A, B, Select, and Start received as button input with joystick except direction key
 #define EMULATOR_NUM_JOYBUTTONS 4
 // Win32 API joyGetPosEx()関数で取得可能なボタンの最大数
+// Win32 API Maximum number of buttons that can be obtained with joyGetPosEx () function
 #define JOYSTICK_MAX_BUTTONS 32
 
 //gblDemoRecordがTRUEの場合、ジョイステイックのルーチンから呼び出される。
 //emuutil.cに実装されている。
+// If gblDemoRecord is TRUE, it is called from a joystick routine.
+// Implemented in emuutil.c
 void DemoRecorderHandler(BYTE bJoy1Read,BYTE bRet);
 
 #define EMULATOR_NES_COLORS 64

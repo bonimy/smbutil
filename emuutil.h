@@ -17,6 +17,7 @@ void LoadTestPlaySettings();
 /*********************************
 
   テストプレイの設定ダイアログ関数
+  Test play setting dialog function
 
 **********************************/
 LRESULT CALLBACK TestPlaySettingDlgProc(HWND hDlg,UINT message,WPARAM wParam,LPARAM lParam);
@@ -29,6 +30,11 @@ BOOL RunEmulatorViewPage(UINT uRoomID,int iPage);
   エミュレータウインドウのバックバッファに準備する。uRoomIDに
   GETADDRESS_CURRENT_EDITTING定数を指定すると、現在エディトしている
   ルームを指定したことになる。
+
+  Picture of the map of the page specified by iPage in the room specified by uRoomID
+  Prepare in the back buffer of the emulator window. To uRoomID
+  If you specify the GETADDRESS_CURRENT_EDITTING constant, you are currently editing
+  You have designated a room.
 
 *******************************************************************/
 BOOL RunEmulatorViewPage(UINT uRoomID,int iPage);

@@ -247,6 +247,15 @@
     <Text Include="document\todo.txt">
       <Filter>Document Files</Filter>
     </Text>
+    <Text Include="misc\history.en-us.txt">
+      <Filter>Document Files</Filter>
+    </Text>
+    <Text Include="misc\readme.en-us.txt">
+      <Filter>Document Files</Filter>
+    </Text>
+    <Text Include="document\todo.en-us.txt">
+      <Filter>Document Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="M6502.asm">

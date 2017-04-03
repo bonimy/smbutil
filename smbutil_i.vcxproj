@@ -229,8 +229,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="document\international.txt" />
+    <Text Include="document\todo.en-us.txt" />
     <Text Include="document\todo.txt" />
+    <Text Include="misc\history.en-us.txt" />
     <Text Include="misc\history.txt" />
+    <Text Include="misc\readme.en-us.txt" />
     <Text Include="misc\readme.txt" />
   </ItemGroup>
   <ItemGroup>
